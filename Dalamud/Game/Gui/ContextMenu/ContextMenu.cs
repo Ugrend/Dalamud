@@ -42,8 +42,8 @@ internal sealed unsafe class ContextMenu : IInternalDisposableService, IContextM
         this.atkModuleVf22OpenAddonByAgentHook = Hook<AtkModuleVf22OpenAddonByAgentDelegate>.FromAddress(raptureAtkModuleVtable[22], this.AtkModuleVf22OpenAddonByAgentDetour);
         this.addonContextMenuOnMenuSelectedHook = Hook<AddonContextMenuOnMenuSelectedDelegate>.FromAddress((nint)AddonContextMenu.StaticVirtualTablePointer->OnMenuSelected, this.AddonContextMenuOnMenuSelectedDetour);
 
-        this.atkModuleVf22OpenAddonByAgentHook.Enable();
-        this.addonContextMenuOnMenuSelectedHook.Enable();
+      //  this.atkModuleVf22OpenAddonByAgentHook.Enable();
+      //  this.addonContextMenuOnMenuSelectedHook.Enable();
     }
 
     private delegate ushort AtkModuleVf22OpenAddonByAgentDelegate(AtkModule* module, byte* addonName, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, bool a8);
@@ -325,7 +325,7 @@ internal sealed unsafe class ContextMenu : IInternalDisposableService, IContextM
 
     private ushort AtkModuleVf22OpenAddonByAgentDetour(AtkModule* module, byte* addonName, int valueCount, AtkValue* values, AgentInterface* agent, nint a7, bool a8)
     {
-        return 0;
+       
         var oldValues = values;
 
         if (MemoryHelper.EqualsZeroTerminatedString("ContextMenu", (nint)addonName))
